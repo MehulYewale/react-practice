@@ -1,0 +1,65 @@
+have a blog on mockserver and proxy server to bind applications
+
+-- Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn’t care whether it is defined as a function or a class.
+-- This is why state is often called local or encapsulated. It is not accessible to any component other than the one that owns and sets it.
+-- You can use stateless components inside stateful components, and vice versa.
+-- State Updates May Be Asynchronous
+-- Lifting State up > To collect data from multiple children, or to have two child components communicate with each other, you need to declare the shared state in their parent component instead. 
+-- Immutability Is Important -- Detecting Changes and execute render method
+-- Props are Read-Only -- All React components must act like pure functions with respect to their props.
+-- React elements are immutable. Once you create an element, you can’t change its children or attributes.
+-- React DOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.
+-- React Only Updates What’s Necessary
+-- only setState function render dom again to update view, state object updation not re-render
+-- React events are named using camelCase, rather than lowercase. eg: onClick
+-- Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly.
+-- binding "this"
+1. this.handleClick = this.handleClick.bind(this); // bind in constructor  -- recommended one
+2. handleClick = () => {  // bind in component class with arrow function
+    console.log('this is:', this);
+  }
+3.  onClick={(e) => this.handleClick(e)} // bind with arrow function in jsx with anonymous method
+4.  onClick={this.deleteRow.bind(this, id)} // bind in jsx
+-- With an arrow function, we have to pass e obj explicitly, but with bind any further arguments are automatically forwarded.
+-- you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render jsx output.
+-- Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called.
+-- Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays
+-- map() function need Keys
+-- React, mutable state is typically kept in the state property of components, and only updated with setState().
+-- Code Spliting similar to lazy load bundling (we can do from webpack or browerify) to reduced the amount of code needed during the initial load.
+-- React.lazy and Suspense is not yet available for server-side rendering. React.lazy takes a function that must call a dynamic import().
+-- Route-based code splitting -- setup route-based code splitting into your app using libraries like React Router with React.lazy.
+-- components may accept arbitrary props, including primitive values, React elements, or functions.
+-- Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+-- Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language. 
+-- Ref forwarding is a technique for automatically passing a ref through a component to one of its children.
+-- To write an uncontrolled component, instead of writing an event handler for every state update, you can use a ref to get form values from the DOM.
+-- There should be a single “source of truth” for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow.
+-- props.children > children prop to pass children elements directly into their output:
+-- Props and composition give you all the flexibility you need to customize a component’s look and behavior in an explicit and safe way. Remember that components may accept arbitrary props, including primitive values, React elements, or functions.
+-- build components that reuse other components and pass data using props. props are a way of passing data from parent to child. If you’re familiar with the concept of state, don’t use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time.
+-- Neither parent nor child components can know if a certain component is stateful or stateless, and they shouldn’t care whether it is defined as a function or a class.
+-- This is why state is often called local or encapsulated. It is not accessible to any component other than the one that owns and sets it.
+
+-- A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature (helps to remove compostion complex approach). Concretely, a higher-order component is a function that takes a component and returns a new component.
+-- Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
+-- HOCs are common in third-party React libraries, such as Redux’s connect and Relay’s createFragmentContainer. (connect in redux, provider, fragments,routers)
+-- Note that a HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC composes the original component by wrapping it in a container component. A HOC is a pure function with zero side-effects.
+-- Don’t Mutate the Original Component in HOC. Use Composition.
+-- This HOC also won’t work with function components, which do not have lifecycle methods.
+-- Caveats : Don’t Use HOCs Inside the render Method, Refs Aren’t Passed Through
+-- Fragments : A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+-- JSX compile --> React.createElement(component, props, ...children)
+-- Props Default to “True” : If you pass no value for a prop, it defaults to true. 
+-- Spread Attributes : TO Pass all the props : <Greeting {...props} />
+-- Render Props : The term “render prop” refers to a technique for sharing code between React components using a prop whose value is a function.
+-- A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
+-- In fact, any prop that is a function that a component uses to know what to render is technically a “render prop”. (children prop is a function)
+-- In most cases, we recommend using controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
+-- To write an uncontrolled component, instead of writing an event handler for every state update, you can use a ref to get form values from the DOM.
+-- Web Components is a suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps.(javascript component/ not react )
+// TODO
+// edit button, form validations, submit control with id propery -- increment and readOnly on edit
+// style, className, createRef, Fragment, lifecycle hooks, input-textAreay-radio-select
+// on delete id should get updated
+// HOC component, React.createElement, React.createRef
